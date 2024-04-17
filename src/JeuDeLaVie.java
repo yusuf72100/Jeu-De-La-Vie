@@ -17,7 +17,7 @@ public class JeuDeLaVie implements Observable{
         this.grille = new Cellule[this.xMax][this.yMax];
         this.observateurs = new ArrayList<>();
         this.commandes = new ArrayList<>();
-        initialiserGrille();::
+        initialiserGrille();
     }
 
     private void setVisiteur(Visteur visiteur) {

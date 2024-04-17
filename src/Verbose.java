@@ -13,8 +13,8 @@ public class Verbose implements Observateur{
     private void verboseMe(){
         int compteur = 0;
 
-        for(int y = 0; y < 10; y++){
-            for(int x = 0; x < 10; x++){
+        for(int y = 0; y < jeuDeLaVie.getyMax(); y++){
+            for(int x = 0; x < jeuDeLaVie.getxMax(); x++){
                 compteur += jeuDeLaVie.getGrille(x,y).estVivante() ? 1 : 0;
             }
         }

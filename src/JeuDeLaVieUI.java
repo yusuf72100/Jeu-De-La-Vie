@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class JeuDeLaVieUI extends JFrame implements Observateur{
     private JeuDeLaVie jeuDeLaVie;
@@ -19,13 +20,22 @@ public class JeuDeLaVieUI extends JFrame implements Observateur{
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.setColor(Color.BLUE);
+
+        // buffer
+        BufferedImage buffer = new BufferedImage(jeuDeLaVie.getxMax() * 5, jeuDeLaVie.getyMax() * 5, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D bufferGraphics = buffer.createGraphics();
+
+        // mise à jour du buffer
+        bufferGraphics.setColor(Color.BLUE);
         for(int x = 0; x < jeuDeLaVie.getxMax(); x++) {
             for(int y = 0; y < jeuDeLaVie.getyMax(); y++) {
                 if(jeuDeLaVie.getGrille(x,y).getEtat().estVivante()) {
-                    g.fillOval(x * 5, y * 5, 5, 5);
+                    bufferGraphics.fillOval(x * 5, y * 5, 5, 5);
                 }
             }
         }
+
+        g.drawImage(buffer, 0, 0, null);
+        bufferGraphics.dispose();
     }
 }

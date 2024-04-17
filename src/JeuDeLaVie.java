@@ -105,7 +105,7 @@ public class JeuDeLaVie implements Observable{
         while (true) {
             System.out.println("Génération n°" + i++);
             jeuDeLaVie.calculerGenerationSuivante();
-            sleep(150);
+            sleep(100);
         }
     }
 }

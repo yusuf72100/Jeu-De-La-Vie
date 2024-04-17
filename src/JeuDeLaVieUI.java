@@ -10,6 +10,7 @@ public class JeuDeLaVieUI extends JFrame implements Observateur{
         this.setTitle("Jeu de la vie");
         this.setVisible(true);
         this.setSize(1000, 1000);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     @Override

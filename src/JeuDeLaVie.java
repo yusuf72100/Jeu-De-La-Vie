@@ -8,8 +8,9 @@ public class JeuDeLaVie implements Observable{
     private List<Observateur> observateurs;
     private List<Commande> commandes;
     private Visteur visiteur;
-    int xMax;
-    int yMax;
+    private int xMax;
+    private int yMax;
+    private int nbGen = 0;
 
     public JeuDeLaVie(int xmax , int ymax) {
         this.xMax = xmax;
@@ -90,20 +91,27 @@ public class JeuDeLaVie implements Observable{
         notifyObservers();
     }
 
+    public int getNbGen() {
+        return nbGen;
+    }
+
     public static void main(String[] args) throws InterruptedException {
         int xmax = 200;
         int ymax = 200;
 
         JeuDeLaVie jeuDeLaVie = new JeuDeLaVie(xmax , ymax);
         JeuDeLaVieUI jeuDeLaVieUI = new JeuDeLaVieUI(jeuDeLaVie);
+        Verbose verbose = new Verbose(jeuDeLaVie);
+
         jeuDeLaVie.setVisiteur(new VisteurClassique(jeuDeLaVie));
 
+        // attach observers
         jeuDeLaVie.attachObservateur(jeuDeLaVieUI);
+        jeuDeLaVie.attachObservateur(verbose);
         jeuDeLaVie.notifyObservers();
 
-        int i = 0;
         while (true) {
-            System.out.println("Génération n°" + i++);
+            jeuDeLaVie.nbGen++;
             jeuDeLaVie.calculerGenerationSuivante();
             sleep(100);
         }
